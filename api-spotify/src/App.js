@@ -8,12 +8,19 @@ import { PoweroffOutlined } from '@ant-design/icons';
 import { Button, Flex } from 'antd';
 
 class App extends React.Component{
+
+  state = {
+    items : [],
+    top : "",
+    url : ""
+  }
   constructor(props){
     super(props);
     const parametros = this.getHashParams();
-    const token = parametros.access_token;
+    this.token = parametros.access_token;
+   
   }
-  
+
   getHashParams() {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -30,13 +37,47 @@ class App extends React.Component{
     $.ajax({
       method: "GET",
       dataType: "Json",
-      url:"https://api.spotify.com/v1/artists/3ipn9JLAPI5GUEo4y4jcoi/top-tracks",
+      url:"https://api.spotify.com/v1/artists/3TVXtAsR1Inumwj472S9r4/top-tracks?country=US",
       headers: {
       Authorization: `Bearer ${this.token}`
       }
     })
     .then(dados => {
       console.log(dados.tracks[0].name)
+      this.setState({top: dados.tracks[0].name})
+    })
+  }
+
+  topAlbum = () =>{
+    $.ajax({
+      method: "GET",
+      dataType: "Json",
+      url:"https://api.spotify.com/v1/artists/3TVXtAsR1Inumwj472S9r4/albums?country=US",
+      headers: {
+      Authorization: `Bearer ${this.token}`
+      }
+    })
+    .then(dados => {
+      dados.items.forEach(item => {
+        console.log(item.name)
+      });
+      const items = dados.items
+      this.setState({items:items })
+    })
+  }
+
+  getArtist = () =>{
+    $.ajax({
+      method: "GET",
+      dataType: "Json",
+      url:"https://api.spotify.com/v1/artists/3TVXtAsR1Inumwj472S9r4",
+      headers: {
+      Authorization: `Bearer ${this.token}`
+      }
+    })
+    .then(dados => {
+      console.log(dados.images[0].url)
+      this.setState({url: dados.images[0].url})
     })
   }
 
@@ -47,11 +88,25 @@ class App extends React.Component{
 
         <div className="App">
           <button><a href="http://localhost:8888"> Logar com o Spotify</a></button>
-          <button onClick={this.topTracksLorde}>Buscar top tracks do Ludacris</button>
+          <button onClick={this.getArtist}>Mostrar artista</button>
+          <button onClick={this.topTracksLorde}>Buscar Top Tracks do Ludacris</button>
+          <button onClick={this.topAlbum}>Buscar lista de álbums</button>
         </div>
 
-        <h2>Lista de músicas:</h2>
-        <p id='lista'></p>
+        <h2>Artista:</h2>
+        <div id="profile">
+          <img src={this.state.url} id="foto"></img>
+        </div>        
+
+        <h2>Música mais tocada de Ludacris:</h2>
+        <p id='toptrack'>{this.state.top}</p>
+
+        <h2>Álbums de Ludacris:</h2>
+        <p id='lista'>
+          {this.state.items.map(item => {
+            return <div>{item.name}</div>
+          })}
+        </p>
 
         <footer>
           <p id='credits'>Desenvolvido por João Paulo &copy; 2023</p>

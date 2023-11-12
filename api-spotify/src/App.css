@@ -49,8 +49,22 @@ div#conta{
   justify-content: center;
 }
 
+p#lista, p#toptrack{
+  color: white;
+  text-align: center;
+}
+
 img#logo{
   width: 40px;
+}
+
+div#profile {
+  display: flex;
+  justify-content: center;
+}
+
+img#foto{
+  width: 120px;
 }
 
 .App {
