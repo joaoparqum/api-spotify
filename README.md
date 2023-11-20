@@ -4,6 +4,11 @@ Projeto em React.JS consumindo API do Spotify
 <h2>Conteúdo</h2>
 <p><strong>React.JS</strong></p> <img align="center" alt="REACT" height="40" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" /> 
 
+<h2>Screenshoots</h2>
+<div align="center">
+  <img src="https://github.com/joaoparqum/api-spotify/assets/87874652/6e0e3556-d8bd-4ef7-aad2-2237304671ed" width="500px">
+</div>
+
 <h2>Como acessar</h2>
 <p>Abra o Git Bash na pasta selecionada e faça o comando: </p>
 
