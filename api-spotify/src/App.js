@@ -4,8 +4,6 @@ import $ from 'jquery';
 import github from './github.png';
 import linkedin from './linkedin.png';
 import spotify from './spotify.png';
-import { PoweroffOutlined } from '@ant-design/icons';
-import { Button, Flex } from 'antd';
 import { Helmet } from 'react-helmet';
 
 class App extends React.Component{
