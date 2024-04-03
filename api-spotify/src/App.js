@@ -6,6 +6,7 @@ import linkedin from './linkedin.png';
 import spotify from './spotify.png';
 import { PoweroffOutlined } from '@ant-design/icons';
 import { Button, Flex } from 'antd';
+import { Helmet } from 'react-helmet';
 
 class App extends React.Component{
 
@@ -18,7 +19,6 @@ class App extends React.Component{
     super(props);
     const parametros = this.getHashParams();
     this.token = parametros.access_token;
-   
   }
 
   getHashParams() {
@@ -84,12 +84,15 @@ class App extends React.Component{
    render() {
     return(
       <body>
+        <Helmet>
+          <title>API SPOTIFY</title>
+        </Helmet>
         <h1>API SPOTIFY <img src={spotify} id='logo'></img></h1>
 
         <div className="App">
           <button><a href="http://localhost:8888"> Logar com o Spotify</a></button>
           <button onClick={this.getArtist}>Mostrar artista</button>
-          <button onClick={this.topTracksLorde}>Buscar Top Tracks do Ludacris</button>
+          <button onClick={this.topTracksLorde}>Buscar Top Tracks do Drake</button>
           <button onClick={this.topAlbum}>Buscar lista de álbums</button>
         </div>
 
@@ -98,10 +101,10 @@ class App extends React.Component{
           <img src={this.state.url} id="foto"></img>
         </div>        
 
-        <h2>Música mais tocada de Ludacris:</h2>
+        <h2>Música mais tocada do Drake:</h2>
         <p id='toptrack'>{this.state.top}</p>
 
-        <h2>Álbums de Ludacris:</h2>
+        <h2>Álbums do Drake:</h2>
         <p id='lista'>
           {this.state.items.map(item => {
             return <div>{item.name}</div>
